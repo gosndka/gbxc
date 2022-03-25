@@ -848,13 +848,13 @@ func (f *Fs) changeSvc(ctx context.Context, deleted bool) error {
 		f.client = &client
 		svc, err := drive.New(f.client)
 		if err != nil {
-			return errors.Wrap(err, "couldn't create Drive client")
+			return fmt.Errorf("couldn't create Drive client: %s", err)
 		}
 		f.svc = svc
 		if f.opt.V2DownloadMinSize >= 0 {
 			v2Svc, err := drive_v2.New(f.client)
 			if err != nil {
-				return errors.Wrap(err, "couldn't create Drive v2 client")
+				return fmt.Errorf("couldn't create Drive v2 client: %s", err)
 			}
 			f.v2Svc = v2Svc
 		}
